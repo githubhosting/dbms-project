@@ -112,7 +112,6 @@ const authProvider = FirebaseAuthProvider(firebaseConfig);
 
 const dataProvider = FirebaseDataProvider(firebaseConfig, {
   logging: true,
-  // rootRef: 'rootrefcollection/QQG2McwjR2Bohi9OwQzP',
   app: firebaseApp,
   persistence: "local",
   disableMeta: true,
@@ -165,8 +164,6 @@ class App extends React.Component {
             icon={MenuIcon}
             list={MenuList}
             show={MenuShow}
-            // create={MenuCreate}
-            // edit={MenuEdit}
           />
           <Resource
             name="Managers"
@@ -175,6 +172,30 @@ class App extends React.Component {
             show={ManagerShow}
             create={PostCreate}
             edit={ManagerEdit}
+          />
+          <Resource
+            name="Cloud_Kitchen"
+            icon={SoupKitchenIcon}
+            list={CloudKitchenList}
+            show={CloudKitchenShow}
+            create={CloudKitchenCreate}
+            edit={CloudKitchenEdit}
+          />
+          <Resource
+            name="customers"
+            icon={CustomerIcon}
+            list={UserList}
+            show={ShowGuesser}
+            create={UserCreate}
+            edit={UserEdit}
+          />
+          <Resource
+            name="owner"
+            icon={UserIcon}
+            list={ListGuesser}
+            show={UserShow}
+            create={UserCreate}
+            edit={UserEdit}
           />
 
           <CustomRoutes>

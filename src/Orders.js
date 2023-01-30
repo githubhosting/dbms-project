@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // import "./App.css";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 // import firebase from "firebase";
-import 'firebase/compat/firestore';
-import firebase from 'firebase/compat/app';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import { ListItemIcon } from '@material-ui/core';
-import ListSubheader from '@mui/material/ListSubheader';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import InboxIcon from '@mui/icons-material/Inbox';
-import PersonIcon from '@mui/icons-material/Person';
-import { styled } from '@mui/material/styles';
-import { tableCellClasses } from '@mui/material/TableCell';
-import { DataGrid } from '@mui/x-data-grid';
-import CommentIcon from '@mui/icons-material/Comment';
-import Divider from '@mui/material/Divider';
-import { Button } from 'react-admin';
+import "firebase/compat/firestore";
+import firebase from "firebase/compat/app";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { ListItemIcon } from "@material-ui/core";
+import ListSubheader from "@mui/material/ListSubheader";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import InboxIcon from "@mui/icons-material/Inbox";
+import PersonIcon from "@mui/icons-material/Person";
+import { styled } from "@mui/material/styles";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { DataGrid } from "@mui/x-data-grid";
+import CommentIcon from "@mui/icons-material/Comment";
+import Divider from "@mui/material/Divider";
+import { Button } from "react-admin";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -44,11 +44,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
+  "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
@@ -61,14 +61,14 @@ const firebaseConfig = {
   // messagingSenderId: "595971213871",
   // appId: "1:595971213871:web:432717a56846feb84a14da",
   // measurementId: "G-BJWWD8H4BX",
-  apiKey: 'AIzaSyCnlpD5DSecqNQzgwwUUbW-BZyz-FuIlb0',
-  authDomain: 'foodey-63192.firebaseapp.com',
-  databaseURL: 'https://foodey-63192-default-rtdb.firebaseio.com',
-  projectId: 'foodey-63192',
-  storageBucket: 'foodey-63192.appspot.com',
-  messagingSenderId: '1056375278651',
-  appId: '1:1056375278651:web:5784ec975990b10c65a01e',
-  measurementId: 'G-G77NTF3JMK',
+  apiKey: "AIzaSyCnlpD5DSecqNQzgwwUUbW-BZyz-FuIlb0",
+  authDomain: "foodey-63192.firebaseapp.com",
+  databaseURL: "https://foodey-63192-default-rtdb.firebaseio.com",
+  projectId: "foodey-63192",
+  storageBucket: "foodey-63192.appspot.com",
+  messagingSenderId: "1056375278651",
+  appId: "1:1056375278651:web:5784ec975990b10c65a01e",
+  measurementId: "G-G77NTF3JMK",
 };
 
 // Initialize Firebase
@@ -87,9 +87,9 @@ const CooksMenu1 = () => {
   const selectcook1 = (cook) => {
     setSelectedCook(cook);
     database
-      .collection('Cooks')
+      .collection("Cooks")
       .doc(cook.id)
-      .collection('Orders')
+      .collection("Orders")
       .get()
       .then((response) => {
         const fetchedOrders = [];
@@ -109,9 +109,9 @@ const CooksMenu1 = () => {
   //to update the cook's orders
   const updateOrder = (order) => {
     database
-      .collection('Cooks')
+      .collection("Cooks")
       .doc(selectedCook.id)
-      .collection('Orders')
+      .collection("Orders")
       .doc(order.id)
       .update({
         status: order.status,
@@ -126,9 +126,9 @@ const CooksMenu1 = () => {
   //to delete the cook's orders
   const deleteOrder = (order) => {
     database
-      .collection('Cooks')
+      .collection("Cooks")
       .doc(selectedCook.id)
-      .collection('Orders')
+      .collection("Orders")
       .doc(order.id)
       .delete()
       .then(() => {
@@ -141,9 +141,9 @@ const CooksMenu1 = () => {
   //to add new order to the cook's orders
   const addOrder = (order) => {
     database
-      .collection('Cooks')
+      .collection("Cooks")
       .doc(selectedCook.id)
-      .collection('Orders')
+      .collection("Orders")
       .add(order)
       .then(() => {
         updateOrders([...orders, order]);
@@ -154,11 +154,11 @@ const CooksMenu1 = () => {
   };
   //add order form
   const [addOrderForm, setAddOrderForm] = useState({
-    id: '',
-    name: '',
-    address: '',
-    phone: '',
-    status: '',
+    id: "",
+    name: "",
+    address: "",
+    phone: "",
+    status: "",
   });
   const handleAddOrderFormChange = (event) => {
     setAddOrderForm({
@@ -170,20 +170,20 @@ const CooksMenu1 = () => {
     event.preventDefault();
     addOrder(addOrderForm);
     setAddOrderForm({
-      id: '',
-      name: '',
-      address: '',
-      phone: '',
-      status: '',
+      id: "",
+      name: "",
+      address: "",
+      phone: "",
+      status: "",
     });
   };
   //update order form
   const [updateOrderForm, setUpdateOrderForm] = useState({
-    id: '',
-    name: '',
-    address: '',
-    phone: '',
-    status: '',
+    id: "",
+    name: "",
+    address: "",
+    phone: "",
+    status: "",
   });
   const handleUpdateOrderFormChange = (event) => {
     setUpdateOrderForm({
@@ -195,20 +195,20 @@ const CooksMenu1 = () => {
     event.preventDefault();
     updateOrder(updateOrderForm);
     setUpdateOrderForm({
-      id: '',
-      name: '',
-      address: '',
-      phone: '',
-      status: '',
+      id: "",
+      name: "",
+      address: "",
+      phone: "",
+      status: "",
     });
   };
   //delete order form
   const [deleteOrderForm, setDeleteOrderForm] = useState({
-    id: '',
-    name: '',
-    address: '',
-    phone: '',
-    status: '',
+    id: "",
+    name: "",
+    address: "",
+    phone: "",
+    status: "",
   });
   const handleDeleteOrderFormChange = (event) => {
     setDeleteOrderForm({
@@ -220,18 +220,18 @@ const CooksMenu1 = () => {
     event.preventDefault();
     deleteOrder(deleteOrderForm);
     setDeleteOrderForm({
-      id: '',
-      name: '',
-      address: '',
-      phone: '',
-      status: '',
+      id: "",
+      name: "",
+      address: "",
+      phone: "",
+      status: "",
     });
   };
   //to get the cooks from the database
   useEffect(() => {
     database
 
-      .collection('Cooks')
+      .collection("Cooks")
       .get()
       .then((response) => {
         const fetchedCooks = [];
@@ -251,7 +251,7 @@ const CooksMenu1 = () => {
   //to get the cooks
   useEffect(() => {
     database
-      .collection('Cooks')
+      .collection("Cooks")
       .get()
       .then((response) => {
         const fetchedCooks = [];
@@ -277,7 +277,7 @@ const CooksMenu1 = () => {
 
   useEffect(() => {
     database
-      .collection('Cooks')
+      .collection("Cooks")
       .get()
       .then((response) => {
         const fetchedCooks = [];
@@ -306,10 +306,10 @@ const CooksMenu1 = () => {
       minWidth: 650,
     },
     sticky: {
-      position: 'sticky',
+      position: "sticky",
       left: 0,
-      background: 'white',
-      boxShadow: '5px 2px 5px grey',
+      background: "white",
+      boxShadow: "5px 2px 5px grey",
     },
   });
   const classes = useStyles();
@@ -362,15 +362,15 @@ const CooksMenu1 = () => {
           sx={{
             borderRadius: 5,
             mt: 4,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
           }}
           component="nav"
           aria-labelledby="nested-list-subheader"
           subheader={
             <>
               <ListSubheader
-                sx={{ fontSize: '1.5rem' }}
+                sx={{ fontSize: "1.5rem" }}
                 disableSticky
                 component="div"
                 id="nested-list-subheader"
@@ -378,7 +378,7 @@ const CooksMenu1 = () => {
                 Cooks
               </ListSubheader>
               <ListSubheader
-                sx={{ fontSize: '10px' }}
+                sx={{ fontSize: "10px" }}
                 disableSticky
                 component="div"
                 id="nested-list-subheader"
@@ -392,8 +392,8 @@ const CooksMenu1 = () => {
             <ListItem
               sx={{
                 border: 0.5,
-                borderRadius: '8px',
-                borderColor: 'primary',
+                borderRadius: "8px",
+                borderColor: "primary",
                 mb: 2,
               }}
               button
@@ -415,7 +415,7 @@ const CooksMenu1 = () => {
           aria-labelledby="nested-list-subheader"
           subheader={
             <ListSubheader
-              sx={{ fontSize: '1.5rem' }}
+              sx={{ fontSize: "1.5rem" }}
               disableSticky
               component="div"
               id="nested-list-subheader"
@@ -429,8 +429,8 @@ const CooksMenu1 = () => {
               divider
               sx={{
                 minWidth: 360,
-                borderRadius: '1rem',
-                boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                borderRadius: "1rem",
+                boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
               }}
               aria-label="customized table"
             >
@@ -438,25 +438,25 @@ const CooksMenu1 = () => {
                 <TableRow>
                   <StyledTableCell>USERS</StyledTableCell>
 
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Friday
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Saturday
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Sunday
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Monday
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Tuesday
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Wednesday
                   </StyledTableCell>
-                  <StyledTableCell sx={{ fontWeight: 'bold' }} align="left">
+                  <StyledTableCell sx={{ fontWeight: "bold" }} align="left">
                     Thursday
                   </StyledTableCell>
                 </TableRow>
@@ -465,10 +465,10 @@ const CooksMenu1 = () => {
                 {orders.map((orderItem) => (
                   <StyledTableRow
                     key={orderItem.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <StyledTableCell
-                      sx={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: "bold" }}
                       component="th"
                       scope="row"
                       className={classes.sticky}
@@ -478,55 +478,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Friday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Friday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Friday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Friday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Friday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Friday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Friday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>
@@ -535,55 +535,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Saturday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Saturday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Saturday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Saturday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Saturday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Saturday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Saturday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>
@@ -591,55 +591,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Sunday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Sunday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Sunday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Sunday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Sunday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Sunday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Sunday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>
@@ -647,55 +647,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Monday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Monday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Monday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Monday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Monday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Monday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Monday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>
@@ -703,55 +703,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Tuesday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Tuesday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Tuesday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Tuesday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Tuesday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Tuesday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Tuesday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>
@@ -759,55 +759,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Wednesday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Wednesday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Wednesday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Wednesday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Wednesday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Wednesday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Wednesday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>
@@ -815,55 +815,55 @@ const CooksMenu1 = () => {
                     <StyledTableCell align="left">
                       <List
                         sx={{
-                          width: '100%',
+                          width: "100%",
                           maxWidth: 360,
-                          bgcolor: 'background.paper',
-                          borderRadius: '8px',
-                          boxShadow: '0 0 0.6rem rgba(0,0,0,0.1)',
+                          bgcolor: "background.paper",
+                          borderRadius: "8px",
+                          boxShadow: "0 0 0.6rem rgba(0,0,0,0.1)",
                         }}
                       >
                         {orderItem.Thursday ? (
                           <>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs'}
+                                primary={"Carbs"}
                                 secondary={orderItem.Thursday.Carbs}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Carbs_Dinner'}
+                                primary={"Carbs_Dinner"}
                                 secondary={orderItem.Thursday.Carbs_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry'}
+                                primary={"Dry"}
                                 secondary={orderItem.Thursday.Dry}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Dry_Dinner'}
+                                primary={"Dry_Dinner"}
                                 secondary={orderItem.Thursday.Dry_Dinner}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy'}
+                                primary={"Gravy"}
                                 secondary={orderItem.Thursday.Gravy}
                               />
                             </ListItem>
                             <ListItem>
                               <ListItemText
-                                primary={'Gravy_Dinner'}
+                                primary={"Gravy_Dinner"}
                                 secondary={orderItem.Thursday.Gravy_Dinner}
                               />
                             </ListItem>
                           </>
                         ) : (
                           <ListItem>
-                            <ListItemText primary={'No Orders'} />
+                            <ListItemText primary={"No Orders"} />
                           </ListItem>
                         )}
                       </List>

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { ReferenceField, ReferenceInput } from 'react-admin';
+import * as React from "react";
+import { ReferenceField, ReferenceInput } from "react-admin";
 
 export const FirebaseReferenceField = (props) => {
   const { source, children, ...rest } = props;
